@@ -1,20 +1,24 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
-  creationTimestamp: null
-  name: test127
+  name: argocd-server
   namespace: test127
 spec:
-  rules:
-  - host: test127.home.lan
-    http:
-      paths:
-      - backend:
-          service:
-            name: test127
-            port:
-              number: 80
-        path: /
-        pathType: Prefix
-status:
-  loadBalancer: {}
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`test127.test`)
+      priority: 10
+      services:
+        - name: argocd-server
+          port: 80
+    - kind: Rule
+      match: Host(`test127.test`) && Header(`Content-Type`, `application/grpc`)
+      priority: 11
+      services:
+        - name: argocd-server
+          port: 80
+          scheme: h2c
+  tls:
+    certResolver: default
