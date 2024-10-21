@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test127
+  name: test127
+  namespace: test127
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test127
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test127
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+        volumeMounts:
+        - name: hostpath-volume
+          mountPath: /usr/share/nginx/html
+        - name: configmap-volume
+          mountPath: /usr/share/nginx/html/configmap
+
+      volumes:
+      - name: hostpath-volume
+        hostPath:
+          path: /home/oom/k8s/test127/html
+          type: Directory
+      - name: configmap-volume
+        configMap:
+          name: test127-configmap
+      
+
+status: {}

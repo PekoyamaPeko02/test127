@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: null
+  name: test127
+  namespace: test127
+spec:
+  rules:
+  - host: test127.home.lan
+    http:
+      paths:
+      - backend:
+          service:
+            name: test127
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer: {}
