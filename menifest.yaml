@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/PekoyamaPeko02/test127.git'
     targetRevision: HEAD
-    path: 'test127'  # Update this to the correct path
+    path: 'deploy.yaml'  # Update this to the correct path
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: test127
