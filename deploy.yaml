@@ -27,15 +27,11 @@ spec:
           mountPath: /usr/share/nginx/html
         - name: configmap-volume
           mountPath: /usr/share/nginx/html/configmap
-
       volumes:
       - name: hostpath-volume
         hostPath:
-          path: /home/oom/k8s/test127/html
-          type: Directory
+          path: /tmp/test127/html  # Remove the type field
       - name: configmap-volume
         configMap:
           name: test127-configmap
-      
-
 status: {}
